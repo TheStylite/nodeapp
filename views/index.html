@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<style type="text/css">
+			.logo{
+				width: 170px;
+				height: 170px;
+				background-color: red;
+				animation:walk 3s linear infinite;
+				position: absolute;
+				left: 50%;
+				margin-left: -100px;
+				top: 100px;
+				background: url(../public/img/logo.jpg) no-repeat center;
+				background-size: 170px 170px;
+				border-radius: 50%;
+			}
+			@keyframes walk{
+				from{
+					transform: rotate(0deg);
+				}
+				to{
+					transform: rotate(360deg);
+				}
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="logo">
+			
+		</div>
+		
+		<audio autoplay="">
+  		<source src="../public/audio/ I'm Yours.mp3" type="audio/ogg">
+		Your browser does not support the audio tag.
+		</audio>
+			
+		
+		
+	</body>
+</html>

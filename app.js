@@ -1,13 +1,27 @@
-var http=require('http');
-var app=http.createServer();
+var express=require('express');
+var path=require('path');
 
-app.on('request',(req,res)=>{
+var app=express();
 
-	console.log('服务器接受到请求...');
-	res.end('hello world');
+app.use('/public/',express.static(path.join(__dirname,'./public/')));
+app.engine('html',require('express-art-template'));
+
+
+app.get('/',(req,res)=>{
+
+	res.render('index.html');
+	
 });
 
 app.listen(80,()=>{
 
-	console.log('server is runing...');
+	console.log('runing.....');
+
 });
+app.use((req,res,next)=>{
+  console.log('错误');
+  res.status(404).end('404');
+  
+});
+
+

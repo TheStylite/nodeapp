@@ -1,0 +1,53 @@
+/*reset*/
+*,
+*::before,
+*::after{
+	margin: 0;
+	padding: 0;
+	/*移动端主要是非固定比例*/
+	box-sizing: border-box;
+	/*移动端主要是webkit内核的高版本浏览器,所以需要兼容*/
+	-webkit-box-sizing: border-box;
+	/*点击高亮效果的清除*/
+	tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: transparent;/*将点击高亮的效果设为透明*/	
+}
+body{
+	font-size: 14px;
+	font-family: "微软雅黑",sans-serif;
+	color: #333;
+	
+}
+ul,ol{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	color: #333;
+}
+input,textarea{
+	border: none;
+	outline: none;
+	/*禁止textarea方法缩小*/
+	resize: none;
+	/*取消元素外观，移动端特有*/
+	-webkit-appearance: none;
+}
+
+
+/*common*/
+.f_left{
+	float: left;
+}
+.f_right{
+	float: right;
+}
+.clear::before, /*清除浮动*/
+.clear::after{
+	display: block;
+	visibility: hidden;
+	content: '';
+	height: 0;
+	line-height: 0;
+	clear: both;
+}

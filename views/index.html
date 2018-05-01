@@ -4,20 +4,10 @@
 		<meta charset="utf-8" />
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="../public/css/normal.css"/>
+		<link rel = "stylesheet" href ="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
 		<style type="text/css">
-			.logo{
-				width: 170px;
-				height: 170px;
-				background-color: red;
-				animation:walk 3s linear infinite;
-				position: absolute;
-				left: 50%;
-				margin-left: -100px;
-				top: 100px;
-				background: url(../public/img/logo.jpg) no-repeat center;
-				background-size: 170px 170px;
-				border-radius: 50%;
-			}
+			
 			@keyframes walk{
 				from{
 					transform: rotate(0deg);
@@ -26,21 +16,237 @@
 					transform: rotate(360deg);
 				}
 			}
+			.web_contanier{
+				max-width: 640px;
+				min-width: 320px;
+				position: relative;
+				width: 100%;
+				margin: 0 auto;
+				
+			}
+			.web_seach{
+				width: 100%;
+				height: 50px;
+				position: fixed;
+				/*background-color: #ff461f;*/
+				left: 0;
+				top: 0;
+				z-index: 1000;
+			}
+			.web_seachbox{
+				width: 100%;
+				max-width: 640px;
+				min-width: 320px;
+				height: 100%;
+				margin: 0 auto;
+				position: relative;
+				background-color: whitesmoke;
+				padding-left: 45px;
+				padding-right: 38px;
+			}
+			.web_seachbox a:first-of-type{
+				position: absolute;
+				width: 30px;
+				height: 100%;
+				line-height: 58px;
+				left: 10px;
+			}
+			.web_seachbox a:last-of-type{
+				position: absolute;
+				width: 30px;
+				height: 100%;
+				line-height: 58px;
+				right: 3px;
+				top: 0;
+			}
+			.web_seachbox input{
+				width: 100%;
+				border-radius: 7px;
+				height: 30px;
+				margin-top: 9px;
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			/*媒体播放部分*/
+			
+			.center_contanier{
+				width: 100%;
+				background-color: whitesmoke;
+				position: relative;
+				overflow: hidden;
+			}
+			.audio_logo{
+				width: 100%;
+				width: 170px;
+				height: 170px;
+				background-color: red;
+				animation:walk 7s linear infinite;
+				position: absolute;
+				left: 50%;
+				margin-left: -75px;
+				top: 100px;
+				background: url(../public/img/logo.jpg) no-repeat center;
+				background-size: 170px 170px;
+				border-radius: 50%;
+				box-shadow: 1px 1px 10px 1px #888888;
+			}
+			.control_audio{	
+				width: 100%;
+				height: 40px;
+				background-color: white;
+				margin-top: 300px;
+				padding:7px 20px 0;
+				position: relative;
+			}
+			.control_audio i{
+				position: absolute;
+				left: 21px;
+				top: 4px;
+			}
+			.controlbox{
+				width: 100%;
+				padding-left: 30px;
+				padding-right: 90px;
+				overflow: hidden;
+			}
+			.control_audio .timer{
+				line-height: 28px;
+				position: absolute;
+				right: 18px;
+				top: 6px;
+			}
+			.progress{
+				margin-top:7px;
+				width: 100%;
+				height: 10px;
+				background-color: #f0f0f4;
+				border-radius: 5px;
+			}
+			
+			.progress .line{
+				height: 100%;
+				float: left;
+				background-color: red;
+				border-radius: 5px;
+			}
+			
+			/*简介部分*/
+			.showself{
+				width: 100%;
+				/*background-color: red;*/
+				text-indent: 25px;
+				line-height: 30px;
+				padding: 10px;	
+			}
+			.footer{
+				
+				margin-top: 50px;
+				text-align: center;
+			}
 			
 		</style>
 	</head>
 	<body>
-		
-		<div class="logo">
+		<div class="web_contanier clear">
+			<header class="web_seach">
+				<div class="web_seachbox">
+					<a href="javascript:;"><i class="fa fa-tags fa-2x"></i></a>
+					<input type="search" name="" id="" value="" placeholder="输入你想要听的歌"/>
+					<a href="javascript:;"><i class="fa fa-search-minus fa-2x"></i></a>
+				</div>
+			</header>
+			<div class="center_contanier clear">
+				<div class="audio_logo">
+					<audio>
+  					<source src="../public/audio/ I'm Yours.mp3" type="audio/ogg">
+					Your browser does not support the audio tag.
+					</audio>
+				</div>
+				
+				<div class="control_audio">
+					<div class="controlbox">
+							<i class="fa fa-play-circle fa-2x swtich"></i>	
+					 <div class="progress">
+                		<div class="line"></div>
+           			 </div>
+					<div class="timer">
+                		<span class="current">00:00</span>/<span class="total">00:00</span>
+           </div>
+					</div>				
+				</div>		
+			</div>
 			
+		<footer class="showself">
+			<p>《I'm Yours》是美国民谣歌手Jason Mraz的专辑《We Sing We Dance We Steal Things》中的一首单曲,由Atlantic发行于2008年5月13日。</p>
+				
+				
+				<div class="footer">
+					功能更新中.....
+				</div>
+			
+			
+		</footer>
+		
 		</div>
 		
-		<audio autoplay="">
-  		<source src="../public/audio/ I'm Yours.mp3" type="audio/ogg">
-		Your browser does not support the audio tag.
-		</audio>
 			
 		
+		<script type="text/javascript">
+			window.onload=function(){
+				
+				function formData(time){
+				var h=Math.floor(time/3600);
+				var m=Math.floor(time%3600/60);
+				var s=Math.floor(time%60);
+				return (m<10&&'0'+m||m)+':'+(s<10&&'0'+s||s);
+				};
+			
+			var audio_control=document.querySelector('.swtich'),
+			_audio=document.querySelector('audio'),
+			_total=document.querySelector('.total'),
+			_current=document.querySelector('.current'),
+			line=document.querySelector('.line'),
+			progress=document.querySelector('.progress');
+			
+			
+			_total.innerHTML=formData(_audio.duration);
+			audio_control.onclick=function(){
+				if(this.classList.contains('fa-play-circle')){
+					_audio.play();
+					this.classList.remove('fa-play-circle');
+					this.classList.add('fa-pause-circle');
+				}else{
+					_audio.pause();
+					this.classList.remove('fa-pause-circle');
+					this.classList.add('fa-play-circle');
+				}
+			}
+			_audio.ontimeupdate=function(){
+				_current.innerHTML=formData(this.currentTime);
+				var ratio=this.currentTime/this.duration;
+				line.style.width=ratio*100+'%';
+			};
+			progress.onclick=function(e){
+				var _width=e.offsetX;
+				var _time=_width/this.offsetWidth*_audio.duration;
+				_audio.currentTime=_time;
+			};
+			_audio.onended = function () {
+            	this.currentTime = 0;
+            	/*播放按钮*/
+            	audio_control.classList.remove('fa-pause-circle');
+            	audio_control.classList.add('fa-play-circle');
+        	}
+			
+			
+				
+				
+			}
+			
+			
+			
+			
+		</script>
 		
 	</body>
 </html>

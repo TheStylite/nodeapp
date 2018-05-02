@@ -4,11 +4,42 @@
 		<meta charset="utf-8" />
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<link rel="stylesheet" type="text/css" href="../public/css/normal.css"/>
+		<link rel="stylesheet" type="text/css" href="/public/css/normal.css"/>
 		<link rel = "stylesheet" href ="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
 		<style type="text/css">
-			
+			@-webkit-keyframes walk{
+				from{
+					transform: rotate(0deg);
+				}
+				to{
+					transform: rotate(360deg);
+				}
+			}
 			@keyframes walk{
+				from{
+					transform: rotate(0deg);
+				}
+				to{
+					transform: rotate(360deg);
+				}
+			}
+			@-moz-keyframes walk{
+				from{
+					transform: rotate(0deg);
+				}
+				to{
+					transform: rotate(360deg);
+				}
+			}
+			@-o-keyframes walk{
+				from{
+					transform: rotate(0deg);
+				}
+				to{
+					transform: rotate(360deg);
+				}
+			}
+			@-ms-keyframes walk{
 				from{
 					transform: rotate(0deg);
 				}
@@ -80,15 +111,19 @@
 				width: 170px;
 				height: 170px;
 				background-color: red;
-				animation:walk 7s linear infinite;
 				position: absolute;
 				left: 50%;
 				margin-left: -75px;
 				top: 100px;
-				background: url(../public/img/logo.jpg) no-repeat center;
+				background: url(/public/img/logo.jpg) no-repeat center;
 				background-size: 170px 170px;
 				border-radius: 50%;
 				box-shadow: 1px 1px 10px 1px #888888;
+				animation:walk 8s linear infinite;
+				-webkit-animation: walk 8s linear infinite;
+				-moz-animation: walk 8s linear infinite;
+				-o-animation:walk 8s linear infinite;
+				-ms-animation:walk 8s linear infinite;
 			}
 			.control_audio{	
 				width: 100%;
@@ -150,15 +185,15 @@
 		<div class="web_contanier clear">
 			<header class="web_seach">
 				<div class="web_seachbox">
-					<a href="javascript:;"><i class="fa fa-tags fa-2x"></i></a>
+					<a href="javascript:;"><i class="fa fa-home fa-2x"></i></a>
 					<input type="search" name="" id="" value="" placeholder="输入你想要听的歌"/>
-					<a href="javascript:;"><i class="fa fa-search-minus fa-2x"></i></a>
+					<a href="javascript:;"><i class="fa fa-search fa-2x"></i></a>
 				</div>
 			</header>
 			<div class="center_contanier clear">
 				<div class="audio_logo">
 					<audio>
-  					<source src="../public/audio/ I'm Yours.mp3" type="audio/ogg">
+  					<source src="/public/audio/ I'm Yours.mp3" type="audio/mp3">
 					Your browser does not support the audio tag.
 					</audio>
 				</div>
@@ -190,60 +225,60 @@
 		</div>
 		
 			
-		
+		<script src="/public/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			window.onload=function(){
-				
-				function formData(time){
-				var h=Math.floor(time/3600);
-				var m=Math.floor(time%3600/60);
-				var s=Math.floor(time%60);
-				return (m<10&&'0'+m||m)+':'+(s<10&&'0'+s||s);
+		
+				$(function($){
+					
+					function formData(time){
+						var h=Math.floor(time/3600);
+						var m=Math.floor(time%3600/60);
+						var s=Math.floor(time%60);
+						return ((m<10?('0'+m):m)+':'+(s<10?('0'+s):s));
 				};
-			
-			var audio_control=document.querySelector('.swtich'),
-			_audio=document.querySelector('audio'),
-			_total=document.querySelector('.total'),
-			_current=document.querySelector('.current'),
-			line=document.querySelector('.line'),
-			progress=document.querySelector('.progress');
-			
-			
-			_total.innerHTML=formData(_audio.duration);
-			audio_control.onclick=function(){
-				if(this.classList.contains('fa-play-circle')){
-					_audio.play();
-					this.classList.remove('fa-play-circle');
-					this.classList.add('fa-pause-circle');
-				}else{
-					_audio.pause();
-					this.classList.remove('fa-pause-circle');
-					this.classList.add('fa-play-circle');
-				}
-			}
-			_audio.ontimeupdate=function(){
-				_current.innerHTML=formData(this.currentTime);
+					var audio_control=$('.swtich'),
+					_audio=$('audio'),
+					_total=$('.total'),
+					_current=$('.current'),
+					line=$('.line'),
+					progress=$('.progress'),
+					logo=$('.audio_logo');
+					
+					_audio.on('canplay',function(){
+						_total.html(formData(_audio[0].duration));
+					})
+					_audio[0].onerror=function(){
+						alert('错误');
+					};
+			audio_control.on('click',function(){
+				if($(this).hasClass('fa-play-circle')){
+					_audio[0].play();
+					$(this).removeClass('fa-play-circle').addClass('fa-pause-circle');
+					}else{
+					_audio[0].pause();
+					$(this).removeClass('fa-pause-circle').addClass('fa-play-circle');
+
+				}	
+					});
+					
+		   _audio[0].ontimeupdate=function(){
+				_current.html(formData(this.currentTime));
 				var ratio=this.currentTime/this.duration;
-				line.style.width=ratio*100+'%';
-			};
-			progress.onclick=function(e){
+				line.css('width',ratio*100+'%')
+		   };
+		
+			progress.on('click',function(e){
 				var _width=e.offsetX;
-				var _time=_width/this.offsetWidth*_audio.duration;
-				_audio.currentTime=_time;
-			};
-			_audio.onended = function () {
-            	this.currentTime = 0;
-            	/*播放按钮*/
-            	audio_control.classList.remove('fa-pause-circle');
-            	audio_control.classList.add('fa-play-circle');
-        	}
-			
-			
-				
-				
-			}
-			
-			
+				var _time=_width/this.offsetWidth*_audio[0].duration;
+				_audio[0].currentTime=_time;
+			})
+			_audio.on('ended',function(){
+				this.currentTime = 0;
+				audio_control.removeClass('fa-pause-circle').addClass('fa-play-circle');
+			})
+					
+				});
+							
 			
 			
 		</script>

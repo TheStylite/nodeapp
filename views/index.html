@@ -192,10 +192,10 @@
 			</header>
 			<div class="center_contanier clear">
 				<div class="audio_logo">
-					<audio>
+					<!--<audio>
   					<source src="/public/audio/ I'm Yours.mp3" type="audio/mp3">
 					Your browser does not support the audio tag.
-					</audio>
+					</audio>-->
 				</div>
 				
 				<div class="control_audio">
@@ -236,6 +236,30 @@
 						var s=Math.floor(time%60);
 						return ((m<10?('0'+m):m)+':'+(s<10?('0'+s):s));
 				};
+				
+					var loadaudio=function(video_src){
+						console.log('ss');
+						return new Promise(function(result,err){
+							let _audio=new Audio();
+							_audio.src=video_src;
+							$('.audio_logo').append(_audio);
+							_audio.oncanplay=function(){
+								result(this.duration);	
+							};
+							_audio.onerror=function(){
+								err(err);
+							};
+						})
+						};
+						
+					loadaudio("/public/audio/ I'm Yours.mp3")
+					.then(function(data){
+						_total.html(formData(data));
+					},function(err){
+						console.log(err);
+					})
+						
+					
 					var audio_control=$('.swtich'),
 					_audio=$('audio'),
 					_total=$('.total'),
@@ -244,12 +268,7 @@
 					progress=$('.progress'),
 					logo=$('.audio_logo');
 					
-					_audio.on('canplay',function(){
-						_total.html(formData(_audio[0].duration));
-					})
-					_audio[0].onerror=function(){
-						alert('错误');
-					};
+					
 			audio_control.on('click',function(){
 				if($(this).hasClass('fa-play-circle')){
 					_audio[0].play();

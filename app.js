@@ -18,8 +18,8 @@ app.listen(80,()=>{
 	console.log('runing.....');
 
 });
-app.use((req,res,next)=>{
-  console.log('错误');
+app.use((err,req,res,next)=>{
+  console.log('错误的网络请求',err.message);
   res.status(404).end('404');
   
 });

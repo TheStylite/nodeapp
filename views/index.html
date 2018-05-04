@@ -51,7 +51,7 @@
 				max-width: 640px;
 				min-width: 320px;
 				position: relative;
-				width: 100%;
+
 				margin: 0 auto;
 				
 			}
@@ -168,16 +168,50 @@
 			/*简介部分*/
 			.showself{
 				width: 100%;
-				/*background-color: red;*/
 				text-indent: 25px;
 				line-height: 30px;
 				padding: 10px;	
 			}
-			.footer{
-				
+			.footer{	
 				margin-top: 50px;
 				text-align: center;
 			}
+			
+			
+			/*侧边栏*/
+			.siderbar{
+				width: 25%;
+				position: absolute;
+				left: 10px;
+				top: 40px;
+				color: white;
+				font-weight: bold;
+				border-radius: 6px;
+				background-color:rgba(0,0,0,.3);
+				padding: 5px;
+				/*display: none;*/
+				transform-origin: left top;
+				-webkit-transform-origin: left top;
+				-ms-transform-origin: left top;
+				-o-transform-origin: left top;
+				-moz-transform-origin: left top;
+				transform:scale(0);
+				-webkit-transform: scale(0);
+				-o-transform: scale(0);
+				-ms-transform: scale(0);
+				-moz-transform: scale(0);
+				transition:all 0.3s linear;
+				-webkit-transition:all 0.3s linear;
+				-ms-transition:all 0.3s linear;
+				-moz-transition:all 0.3s linear;
+				-o-transition:all 0.3s linear;
+			}
+			.siderbar li{
+				text-align: center;
+				margin-top: 10px;
+				cursor: pointer;
+			}
+			
 			
 		</style>
 	</head>
@@ -185,7 +219,13 @@
 		<div class="web_contanier clear">
 			<header class="web_seach">
 				<div class="web_seachbox">
-					<a href="javascript:;"><i class="fa fa-home fa-2x"></i></a>
+					<a href="javascript:;" class="hoverclass"><i class="fa fa-bars fa-2x"></i></a>
+							<ul class="siderbar">
+								<li>首页</li>
+								<li>relax</li>
+								<li>see</li>
+								<li>me?</li>
+							</ul>
 					<input type="search" name="" id="" value="" placeholder="输入你想要听的歌"/>
 					<a href="javascript:;"><i class="fa fa-search fa-2x"></i></a>
 				</div>
@@ -200,7 +240,10 @@
 				
 				<div class="control_audio">
 					<div class="controlbox">
-							<i class="fa fa-play-circle fa-2x swtich"></i>	
+							<i class="fa fa-play-circle fa-2x swtich"></i>
+							
+							
+							
 					 <div class="progress">
                 		<div class="line"></div>
            			 </div>
@@ -210,6 +253,7 @@
 					</div>				
 				</div>		
 			</div>
+			
 			
 		<footer class="showself">
 			<p>《I'm Yours》是美国民谣歌手Jason Mraz的专辑《We Sing We Dance We Steal Things》中的一首单曲,由Atlantic发行于2008年5月13日。</p>
@@ -226,7 +270,7 @@
 		
 			
 		<script src="/public/js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-		<script type="text/javascript">
+		<script type="text/javascript" async="async">
 		
 				$(function($){
 					
@@ -236,11 +280,10 @@
 						var s=Math.floor(time%60);
 						return ((m<10?('0'+m):m)+':'+(s<10?('0'+s):s));
 				};
-				
+					var showflag=false;
 					var loadaudio=function(video_src){
-						console.log('ss');
 						return new Promise(function(result,err){
-							let _audio=new Audio();
+							var _audio=new Audio();
 							_audio.src=video_src;
 							$('.audio_logo').append(_audio);
 							_audio.oncanplay=function(){
@@ -295,7 +338,23 @@
 				this.currentTime = 0;
 				audio_control.removeClass('fa-pause-circle').addClass('fa-play-circle');
 			})
-					
+			
+			//获取客户端高度
+//			var _cilentheight=$(window).height();
+//				$('.siderbar').find('ul').css('height',_cilentheight);
+//				
+//				
+			
+			$('.hoverclass').on('click',function(){
+				
+				if(!showflag){
+					$('.siderbar').css('transform',"scale(1)");
+					showflag=true;
+				}else{
+					$('.siderbar').css('transform',"scale(0)");
+					showflag=false;
+				};
+			})
 				});
 							
 			
